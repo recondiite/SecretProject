@@ -169,8 +169,12 @@ local function act()
 	
 	if currentAction.Action == "Upgrade" then
 		local _,towerData = getTowerData(currentAction.Tower)
-		print(towerData, towerData.Upgrades[currentAction.Path])
-		if getMoney() < getUpgradeCost(currentAction.Path, towerData.Upgrades[currentAction.Path]) then return end
+		print(towerData)
+		if towerData == nil then return end
+		print(towerData.Upgrades[currentAction.Path])
+		local upgradeCost = getUpgradeCost(currentAction.Path, towerData.Upgrades[currentAction.Path])
+		print(getMoney(), upgradeCost)
+		if getMoney() < upgradeCost then return end
 		upgradeTower(currentAction.Tower, currentAction.Path)
 		
 		currentAction.Amount = currentAction.Amount - 1
@@ -216,13 +220,13 @@ if game.PlaceId ~= gameId then
 
 end
 
-game:GetService("RunService").RenderStepped:Connect(function()
+while task.wait(0.1) do
 	if game.PlaceId == gameId then
 		tpPlayerToLobby()
 		return
 	end
 	
 	act()
-end)
+end
 
 
