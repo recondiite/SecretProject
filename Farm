@@ -202,8 +202,8 @@ if game.PlaceId ~= gameId then
 
 		towerIndex[part] = {
 			Upgrades = {
-				0,
-				0
+				1,
+				1
 			},
 
 			Index = currentCount,
