@@ -1,7 +1,9 @@
+
 local whitelistedMap = "BLOX OUT"
 
 local gameId = 9503261072
 
+--loadstring(game:HttpGet('https://raw.githubusercontent.com/recondiite/SecretProject/main/Farm'))()
 --Remotes: game.ReplicatedStorage.Remotes.PlaceTower, game.ReplicatedStorage.Remotes.TowerUpgradeRequest, game.ReplicatedStorage.Remotes.SkipWaveVoteCast
 local actionOrder = {
 	[1] = {
@@ -224,7 +226,7 @@ if game.PlaceId ~= gameId then
 
 end
 
-while task.wait(0.1) do
+while task.wait(1) do
 	if game.PlaceId == gameId then
 		tpPlayerToLobby()
 		return
