@@ -13,28 +13,28 @@ local actionOrder = {
 			0
 		}
 	},
-	
+
 	[2] = {
 		Action = "Upgrade",
 		Tower = 1,
 		Path = 1,
 		Amount = 2,
 	},
-	
+
 	[3] = {
 		Action = "Upgrade",
 		Tower = 1,
 		Path = 2,
 		Amount = 1,
 	},
-	
+
 	[4] = {
 		Action = "Upgrade",
 		Tower = 1,
 		Path = 1,
 		Amount = 1,
 	},
-	
+
 	[5] = {
 		Action = "PlaceTower",
 		RemoteData = {
@@ -44,14 +44,14 @@ local actionOrder = {
 			0
 		}
 	},
-	
+
 	[6] = {
 		Action = "Upgrade",
 		Tower = 2,
 		Path = 2,
 		Amount = 5,
 	},
-	
+
 	[7] = {
 		Action = "Upgrade",
 		Tower = 1,
@@ -99,7 +99,7 @@ local function findMap()
 	for i,v in pairs(workspace.APCs:GetDescendants()) do
 		if v:IsA("BasePart") == false then continue end
 		if v.Name ~= "screen" then continue end
-		
+
 		if v.displayscreen.map.Text == whitelistedMap then return v.Parent.Parent end
 	end
 end
@@ -107,13 +107,13 @@ end
 local function tpPlayerToLobby()
 	if player.Character == nil then return end
 	if player.Character:FindFirstChild("HumanoidRootPart") == nil then return end
-	
+
 	if player.Character:FindFirstChild("Humanoid") == nil then return end
 	if player.Character.Humanoid.Sit == true then return end
-	
+
 	local map = findMap()
 	if map == nil then return end
-	
+
 	player.Character:SetPrimaryPartCFrame(map.mapdisplay.screen.CFrame)
 end
 
@@ -131,16 +131,16 @@ end
 
 local function upgradeTower(towerNumber, path)
 	local tower = nil
-	
+
 	for i,v in pairs(towerIndex) do
 		if v.Index == towerNumber then
 			tower = i
 			break
 		end
 	end
-	
+
 	if tower == nil or towerIndex[tower] == nil then return end
-	
+
 	towerIndex[tower].Upgrades[path] = towerIndex[tower].Upgrades[path] + 1
 	game.ReplicatedStorage.Remotes.TowerUpgradeRequest:FireServer(towerNumber, path)
 end
@@ -156,34 +156,37 @@ end
 local function act()
 	local currentAction = actionOrder[currentIndexedAction]
 	if currentIndexedAction > #actionOrder then return end
-	
+
 	if player.PlayerGui:FindFirstChild("Interface").GameOverScreen.Visible == true then
 		game:GetService("ReplicatedStorage").Remotes.RequestTeleportToLobby:FireServer()
 		return
 	end
-	
+
 	if currentAction.Action == "PlaceTower" then
 		if getMoney() < 280 then return end
 		game.ReplicatedStorage.Remotes.PlaceTower:InvokeServer(unpack(currentAction.RemoteData))
 	end
-	
+
 	if currentAction.Action == "Upgrade" then
 		local _,towerData = getTowerData(currentAction.Tower)
 		if towerData == nil then return end
-		print(towerData.Upgrades[currentAction.Path])
-		local upgradeCost = getUpgradeCost(currentAction.Path, towerData.Upgrades[currentAction.Path])
-		print(getMoney(), upgradeCost)
-		if upgradeCost >= getMoney() then return end
-		upgradeTower(currentAction.Tower, currentAction.Path)
 		
+		local upgradeCost = getUpgradeCost(currentAction.Path, towerData.Upgrades[currentAction.Path])
+		if upgradeCost >= getMoney() then return end
+		
+		print(towerData.Upgrades[currentAction.Path])
+		print(getMoney(), upgradeCost)
+		
+		upgradeTower(currentAction.Tower, currentAction.Path)
+
 		currentAction.Amount = currentAction.Amount - 1
 		if currentAction.Amount > 0 then return end
 	end
-	
+
 	if currentAction.Action == "Skip" then
 		game.ReplicatedStorage.Remotes.SkipWaveVoteCast:FireServer(true)
 	end
-	
+
 	currentIndexedAction = currentIndexedAction + 1
 end
 
@@ -195,7 +198,7 @@ end
 
 if game.PlaceId ~= gameId then
 	game:GetService("ReplicatedStorage").Remotes.DifficultyVoteReady:FireServer()
-	
+
 	workspace.Towers.ChildAdded:Connect(function(part)
 		local currentCount = 1
 
@@ -224,7 +227,7 @@ while task.wait(0.1) do
 		tpPlayerToLobby()
 		return
 	end
-	
+
 	act()
 end
 
