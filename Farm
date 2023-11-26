@@ -325,6 +325,7 @@ local function act()
 	if currentAction.Action == "PlaceTower" then
 		if getMoney() < 280 then return end
 		game.ReplicatedStorage.Remotes.PlaceTower:InvokeServer(unpack(currentAction.RemoteData))
+		task.wait(0.1)
 	end
 
 	if currentAction.Action == "Upgrade" then
