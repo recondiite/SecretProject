@@ -6,6 +6,9 @@ local gameId = 9503261072
 --loadstring(game:HttpGet('https://raw.githubusercontent.com/recondiite/SecretProject/main/Farm'))()
 --Remotes: game.ReplicatedStorage.Remotes.PlaceTower, game.ReplicatedStorage.Remotes.TowerUpgradeRequest, game.ReplicatedStorage.Remotes.SkipWaveVoteCast
 local actionOrder = {
+	
+	
+	--tower 1
 	[1] = {
 		Action = "PlaceTower",
 		RemoteData = {
@@ -36,7 +39,9 @@ local actionOrder = {
 		Path = 1,
 		Amount = 1,
 	},
-
+	
+	
+	--tower 2
 	[5] = {
 		Action = "PlaceTower",
 		RemoteData = {
@@ -60,6 +65,164 @@ local actionOrder = {
 		Path = 1,
 		Amount = 2,
 	},
+	
+	[8] = {
+		Action = "Upgrade",
+		Tower = 1,
+		Path = 2,
+		Amount = 1,
+	},
+	
+	[9] = {
+		Action = "Upgrade",
+		Tower = 2,
+		Path = 1,
+		Amount = 2,
+	},
+	
+	
+	
+	--tower 3
+	[10] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-362.7292175292969, 123.75299835205078, -107.65520477294922),
+			0
+		}
+	},
+	
+	[11] = {
+		Action = "Upgrade",
+		Tower = 3,
+		Path = 1,
+		Amount = 3,
+	},
+	
+	[12] = {
+		Action = "Upgrade",
+		Tower = 3,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	[13] = {
+		Action = "Upgrade",
+		Tower = 3,
+		Path = 1,
+		Amount = 2,
+	},
+	
+	
+	
+	--tower 4
+	[14] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-359.7292175292969, 123.75299835205078, -100.65520477294922),
+			0
+		}
+	},
+	
+	[15] = {
+		Action = "Upgrade",
+		Tower = 4,
+		Path = 2,
+		Amount = 5,
+	},
+	
+	[16] = {
+		Action = "Upgrade",
+		Tower = 4,
+		Path = 1,
+		Amount = 2,
+	},
+	
+	
+	
+	--tower 5
+	[17] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-359.7292175292969, 123.75299835205078, -103.65520477294922),
+			0
+		}
+	},
+
+	[18] = {
+		Action = "Upgrade",
+		Tower = 5,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[19] = {
+		Action = "Upgrade",
+		Tower = 5,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	
+	--tower 6
+	[20] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-359.7292175292969, 123.75299835205078, -106.65520477294922),
+			0
+		}
+	},
+
+	[21] = {
+		Action = "Upgrade",
+		Tower = 6,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[22] = {
+		Action = "Upgrade",
+		Tower = 6,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	
+	--tower 7
+	[23] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-359.7292175292969, 123.75299835205078, -106.65520477294922),
+			0
+		}
+	},
+
+	[24] = {
+		Action = "Upgrade",
+		Tower = 7,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[25] = {
+		Action = "Upgrade",
+		Tower = 7,
+		Path = 2,
+		Amount = 2,
+	},
+
+
 }
 
 local upgradeValues = {
@@ -196,7 +359,7 @@ end
 
 local function useAbilities()
 	for i,v in pairs(towerIndex) do
-		game.ReplicatedStorage.Remotes.TowerUseAbilityRequest:InvokeServer(v, 1)
+		game.ReplicatedStorage.Remotes.TowerUseAbilityRequest:InvokeServer(v.Index, 1)
 	end
 end
 
@@ -233,6 +396,7 @@ while task.wait(1) do
 	end
 
 	act()
+	useAbilities()
 end
 
 
