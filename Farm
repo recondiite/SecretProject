@@ -171,7 +171,9 @@ local function act()
 		local _,towerData = getTowerData(currentAction.Tower)
 		if towerData == nil then return end
 		
+		
 		local upgradeCost = getUpgradeCost(currentAction.Path, towerData.Upgrades[currentAction.Path])
+		print(upgradeCost)
 		if upgradeCost >= getMoney() then return end
 		
 		print(towerData.Upgrades[currentAction.Path])
