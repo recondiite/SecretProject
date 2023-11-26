@@ -117,12 +117,12 @@ local actionOrder = {
 	
 	
 	--tower 4
-	[14] = {
+	--[[[14] = {
 		Action = "PlaceTower",
 		RemoteData = {
 			2460.55054241,
 			"Ranger",
-			Vector3.new(-359.7292175292969, 123.75299835205078, -100.65520477294922),
+			Vector3.new(-360.7292175292969, 123.75299835205078, -100.65520477294922),
 			0
 		}
 	},
@@ -139,90 +139,7 @@ local actionOrder = {
 		Tower = 4,
 		Path = 1,
 		Amount = 2,
-	},
-	
-	
-	
-	--tower 5
-	[17] = {
-		Action = "PlaceTower",
-		RemoteData = {
-			2460.55054241,
-			"Ranger",
-			Vector3.new(-359.7292175292969, 123.75299835205078, -103.65520477294922),
-			0
-		}
-	},
-
-	[18] = {
-		Action = "Upgrade",
-		Tower = 5,
-		Path = 1,
-		Amount = 5,
-	},
-
-	[19] = {
-		Action = "Upgrade",
-		Tower = 5,
-		Path = 2,
-		Amount = 2,
-	},
-	
-	
-	
-	--tower 6
-	[20] = {
-		Action = "PlaceTower",
-		RemoteData = {
-			2460.55054241,
-			"Ranger",
-			Vector3.new(-359.7292175292969, 123.75299835205078, -106.65520477294922),
-			0
-		}
-	},
-
-	[21] = {
-		Action = "Upgrade",
-		Tower = 6,
-		Path = 1,
-		Amount = 5,
-	},
-
-	[22] = {
-		Action = "Upgrade",
-		Tower = 6,
-		Path = 2,
-		Amount = 2,
-	},
-	
-	
-	
-	--tower 7
-	[23] = {
-		Action = "PlaceTower",
-		RemoteData = {
-			2460.55054241,
-			"Ranger",
-			Vector3.new(-359.7292175292969, 123.75299835205078, -106.65520477294922),
-			0
-		}
-	},
-
-	[24] = {
-		Action = "Upgrade",
-		Tower = 7,
-		Path = 1,
-		Amount = 5,
-	},
-
-	[25] = {
-		Action = "Upgrade",
-		Tower = 7,
-		Path = 2,
-		Amount = 2,
-	},
-
-
+	},]]
 }
 
 local upgradeValues = {
@@ -338,12 +255,8 @@ local function act()
 		
 		
 		local upgradeCost = getUpgradeCost(currentAction.Path, towerData.Upgrades[currentAction.Path])
-		print(upgradeCost)
 		if upgradeCost >= getMoney() then return end
-		
-		print(towerData.Upgrades[currentAction.Path])
-		print(getMoney(), upgradeCost)
-		
+
 		upgradeTower(currentAction.Tower, currentAction.Path)
 
 		currentAction.Amount = currentAction.Amount - 1
