@@ -324,6 +324,215 @@ local actionOrder = {
 		Amount = 2,
 	},
 	
+	
+	--tower 12
+	[38] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-351.9363098144531, 123.75299835205078, -115.86131286621094),
+			0
+		}
+	},
+
+	[39] = {
+		Action = "Upgrade",
+		Tower = 12,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[40] = {
+		Action = "Upgrade",
+		Tower = 12,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	
+	--tower 13
+	[41] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-354.9363098144531, 123.75299835205078, -115.861312866210942),
+			0
+		}
+	},
+
+	[42] = {
+		Action = "Upgrade",
+		Tower = 13,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[43] = {
+		Action = "Upgrade",
+		Tower = 13,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	--tower 14
+	[44] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-357.9363098144531, 123.75299835205078, -115.86131286621094),
+			0
+		}
+	},
+
+	[45] = {
+		Action = "Upgrade",
+		Tower = 14,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[46] = {
+		Action = "Upgrade",
+		Tower = 14,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	--tower 15
+	[47] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-360.9363098144531, 123.75299835205078, -115.86131286621094),
+			0
+		}
+	},
+
+	[48] = {
+		Action = "Upgrade",
+		Tower = 15,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[49] = {
+		Action = "Upgrade",
+		Tower = 15,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	--tower 16
+	[50] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-363.9363098144531, 123.75299835205078, -115.86131286621094),
+			0
+		}
+	},
+
+	[51] = {
+		Action = "Upgrade",
+		Tower = 16,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[52] = {
+		Action = "Upgrade",
+		Tower = 16,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	
+	
+	--tower 17
+	[53] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-376.5137634277344, 123.75299835205078, -112.48831176757812),
+			0
+		}
+	},
+
+	[54] = {
+		Action = "Upgrade",
+		Tower = 17,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[55] = {
+		Action = "Upgrade",
+		Tower = 17,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	--tower 18
+	[56] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-376.5137634277344, 123.75299835205078, -115.48831176757812),
+			0
+		}
+	},
+
+	[57] = {
+		Action = "Upgrade",
+		Tower = 18,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[58] = {
+		Action = "Upgrade",
+		Tower = 18,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	--tower 19
+	[59] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-376.5137634277344, 123.75299835205078, -118.48831176757812),
+			0
+		}
+	},
+
+	[60] = {
+		Action = "Upgrade",
+		Tower = 19,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[61] = {
+		Action = "Upgrade",
+		Tower = 19,
+		Path = 2,
+		Amount = 2,
+	},
+	
 }
 
 local upgradeValues = {
@@ -357,6 +566,7 @@ local towerIndex = {
 }
 
 repeat task.wait() until game:IsLoaded()
+task.wait(2)
 
 local player = game.Players.LocalPlayer
 local currentIndexedAction = 1
