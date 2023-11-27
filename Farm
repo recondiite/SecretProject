@@ -704,7 +704,7 @@ end
 while task.wait(1) do
 	if game.PlaceId == gameId then
 		tpPlayerToLobby()
-		return
+		continue
 	end
 
 	act()
