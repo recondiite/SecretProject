@@ -325,12 +325,11 @@ local function act()
 	if currentAction.Action == "PlaceTower" then
 		if getMoney() < 280 then return end
 		game.ReplicatedStorage.Remotes.PlaceTower:InvokeServer(unpack(currentAction.RemoteData))
-		task.wait(0.1)
 	end
 
 	if currentAction.Action == "Upgrade" then
 		local _,towerData = getTowerData(currentAction.Tower)
-		if towerData == nil then return end
+		if towerData == nil then print(currentIndexedAction, currentAction.Tower) return end
 
 
 		local upgradeCost = getUpgradeCost(currentAction.Path, towerData.Upgrades[currentAction.Path])
