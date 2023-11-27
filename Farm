@@ -289,9 +289,18 @@ local function getUpgradeCost(path, current)
 	return upgradeValues[path][current]
 end
 
+local function getNewTowerID(number)
+	for i,v in pairs(towerIndex) do
+		if v.Index == number then
+			return getNewTowerID(number + 1)
+		end
+	end
+	
+	return number
+end
+
 local function getTowerData(number)
 	for i,v in pairs(towerIndex) do
-		print(number, v.Index)
 		if v.Index == number then
 			return i,v
 		end
@@ -308,6 +317,8 @@ local function upgradeTower(towerNumber, path)
 	towerIndex[tower].Upgrades[path] = towerIndex[tower].Upgrades[path] + 1
 	game.ReplicatedStorage.Remotes.TowerUpgradeRequest:FireServer(towerNumber, path)
 end
+
+
 
 local function act()
 	local currentAction = actionOrder[currentIndexedAction]
@@ -355,19 +366,13 @@ if game.PlaceId ~= gameId then
 	game:GetService("ReplicatedStorage").Remotes.DifficultyVoteReady:FireServer()
 
 	workspace.Towers.ChildAdded:Connect(function(part)
-		local currentCount = 1
-
-		for i,v in pairs(towerIndex) do
-			if v.Index == currentCount then currentCount = currentCount + 1 end
-		end
-
 		towerIndex[part] = {
 			Upgrades = {
 				1,
 				1
 			},
 
-			Index = currentCount,
+			Index = getNewTowerID(1),
 		}
 	end)
 
