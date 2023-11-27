@@ -6,8 +6,8 @@ local gameId = 9503261072
 --loadstring(game:HttpGet('https://raw.githubusercontent.com/recondiite/SecretProject/main/Farm'))()
 --Remotes: game.ReplicatedStorage.Remotes.PlaceTower, game.ReplicatedStorage.Remotes.TowerUpgradeRequest, game.ReplicatedStorage.Remotes.SkipWaveVoteCast
 local actionOrder = {
-	
-	
+
+
 	--tower 1
 	[1] = {
 		Action = "PlaceTower",
@@ -39,8 +39,8 @@ local actionOrder = {
 		Path = 1,
 		Amount = 1,
 	},
-	
-	
+
+
 	--tower 2
 	[5] = {
 		Action = "PlaceTower",
@@ -65,23 +65,23 @@ local actionOrder = {
 		Path = 1,
 		Amount = 2,
 	},
-	
+
 	[8] = {
 		Action = "Upgrade",
 		Tower = 1,
 		Path = 2,
 		Amount = 1,
 	},
-	
+
 	[9] = {
 		Action = "Upgrade",
 		Tower = 2,
 		Path = 1,
 		Amount = 2,
 	},
-	
-	
-	
+
+
+
 	--tower 3
 	[10] = {
 		Action = "PlaceTower",
@@ -92,30 +92,30 @@ local actionOrder = {
 			0
 		}
 	},
-	
+
 	[11] = {
 		Action = "Upgrade",
 		Tower = 3,
 		Path = 1,
 		Amount = 3,
 	},
-	
+
 	[12] = {
 		Action = "Upgrade",
 		Tower = 3,
 		Path = 2,
 		Amount = 2,
 	},
-	
+
 	[13] = {
 		Action = "Upgrade",
 		Tower = 3,
 		Path = 1,
 		Amount = 2,
 	},
-	
-	
-	
+
+
+
 	--tower 4
 	[14] = {
 		Action = "PlaceTower",
@@ -126,23 +126,23 @@ local actionOrder = {
 			0
 		}
 	},
-	
+
 	[15] = {
 		Action = "Upgrade",
 		Tower = 4,
 		Path = 2,
 		Amount = 5,
 	},
-	
+
 	[16] = {
 		Action = "Upgrade",
 		Tower = 4,
 		Path = 1,
 		Amount = 2,
 	},
-	
-	
-	
+
+
+
 	--tower 5
 	[17] = {
 		Action = "PlaceTower",
@@ -167,8 +167,8 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
-	
+
+
 	--tower 6
 	[20] = {
 		Action = "PlaceTower",
@@ -193,7 +193,7 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
+
 	--tower 7
 	[23] = {
 		Action = "PlaceTower",
@@ -331,9 +331,10 @@ local function act()
 	if currentAction.Action == "Upgrade" then
 		local _,towerData = getTowerData(currentAction.Tower)
 		if towerData == nil then return end
-		
-		
+
+
 		local upgradeCost = getUpgradeCost(currentAction.Path, towerData.Upgrades[currentAction.Path])
+		print(currentIndexedAction, upgradeCost)
 		if upgradeCost >= getMoney() then return end
 
 		upgradeTower(currentAction.Tower, currentAction.Path)
@@ -390,5 +391,3 @@ while task.wait(1) do
 	act()
 	useAbilities()
 end
-
-
