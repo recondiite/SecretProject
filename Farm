@@ -289,28 +289,24 @@ local function getUpgradeCost(path, current)
 	return upgradeValues[path][current]
 end
 
-local function upgradeTower(towerNumber, path)
-	local tower = nil
-
+local function getTowerData(number)
 	for i,v in pairs(towerIndex) do
-		if v.Index == towerNumber then
-			tower = i
-			break
+		print(number, v.Index)
+		if v.Index == number then
+			return i,v
 		end
 	end
+end
+
+local function upgradeTower(towerNumber, path)
+	local tower = nil
+	
+	local tower,towerData = getTowerData(towerNumber)
 
 	if tower == nil or towerIndex[tower] == nil then return end
 
 	towerIndex[tower].Upgrades[path] = towerIndex[tower].Upgrades[path] + 1
 	game.ReplicatedStorage.Remotes.TowerUpgradeRequest:FireServer(towerNumber, path)
-end
-
-local function getTowerData(number)
-	for i,v in pairs(towerIndex) do
-		if v.Index == number then
-			return i,v
-		end
-	end
 end
 
 local function act()
