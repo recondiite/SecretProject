@@ -581,13 +581,16 @@ local function findMap()
 end
 
 local function tpPlayerToLobby()
+	print(0)
 	if player.Character == nil then return end
 	if player.Character:FindFirstChild("HumanoidRootPart") == nil then return end
-
+	
+	print(1)
 	if player.Character:FindFirstChild("Humanoid") == nil then return end
 	if player.Character.Humanoid.Sit == true then return end
-
+	
 	local map = findMap()
+	print(findMap())
 	if map == nil then return end
 
 	player.Character:SetPrimaryPartCFrame(map.mapdisplay.screen.CFrame)
