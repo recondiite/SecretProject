@@ -175,7 +175,7 @@ local actionOrder = {
 		RemoteData = {
 			2460.55054241,
 			"Ranger",
-			Vector3.new(-360.1012268066406, 123.75299835205078, -107.19678497314453),
+			Vector3.new(-360.1012268066406, 123.75299835205078, -106.19678497314453),
 			0
 		}
 	},
@@ -200,7 +200,7 @@ local actionOrder = {
 		RemoteData = {
 			2460.55054241,
 			"Ranger",
-			Vector3.new(-360.1012268066406, 123.75299835205078, -110.19678497314453),
+			Vector3.new(-360.1012268066406, 123.75299835205078, -109.19678497314453),
 			0
 		}
 	},
@@ -218,6 +218,112 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
+	
+	
+	
+	--tower 8
+	[26] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-357.1012268066406, 123.75299835205078, -100.19678497314453),
+			0
+		}
+	},
+
+	[27] = {
+		Action = "Upgrade",
+		Tower = 8,
+		Path = 2,
+		Amount = 5,
+	},
+
+	[28] = {
+		Action = "Upgrade",
+		Tower = 8,
+		Path = 1,
+		Amount = 2,
+	},
+	
+	
+	--tower 9
+	[29] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-357.1012268066406, 123.75299835205078, -103.19678497314453),
+			0
+		}
+	},
+
+	[30] = {
+		Action = "Upgrade",
+		Tower = 9,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[31] = {
+		Action = "Upgrade",
+		Tower = 9,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	--tower 10
+	[32] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-357.1012268066406, 123.75299835205078, -106.19678497314453),
+			0
+		}
+	},
+
+	[33] = {
+		Action = "Upgrade",
+		Tower = 10,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[34] = {
+		Action = "Upgrade",
+		Tower = 10,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	--tower 11
+	[35] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-357.1012268066406, 123.75299835205078, -109.19678497314453),
+			0
+		}
+	},
+
+	[36] = {
+		Action = "Upgrade",
+		Tower = 11,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[37] = {
+		Action = "Upgrade",
+		Tower = 11,
+		Path = 2,
+		Amount = 2,
+	},
+	
 }
 
 local upgradeValues = {
