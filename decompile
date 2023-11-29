@@ -1,122 +1,1056 @@
-local _decompile = assert(decompile or syn_decompile)
-local _getscriptclosure = assert(getscriptclosure)
-local _getrenv = assert(getrenv or syn_getrenv)
-local _getgenv = assert(getgenv or syn_getgenv)
-local _getsenv = assert(getsenv or syn_getsenv)
-local _getmenv = assert(getmenv or syn_getmenv)
-local _getprotos = assert(getprotos or debug.getprotos)
-local _getconstants = assert(getconstants or debug.getconstants)
-local _getinfo = debug.info
-local stringsplit = string.split
-local stringmatch = string.match
-local stringfind = string.find
-local stringgmatch = string.gmatch
-local stringgsub = string.gsub
-local tableclear = table.clear
-local tableinsert = table.insert
-local tableremove = table.remove
 
-local IsA = game.IsA
+local whitelistedMap = "BLOX OUT"
 
-local GetFuncs
-do
-local Funcs = {}
-function GetFuncs(Closure, Globals)
-local Protos = _getprotos(Closure)
-if Protos and #Protos > 0 then
-for Index, Proto in ipairs(_getprotos(Closure)) do
-local Name, Args, VarArg = _getinfo(Proto, "na")
-local Protos = _getprotos(Proto)
-if #Name > 0 and not Globals[Name] then -- we dont need globals
-tableinsert(Funcs, {Name, Args, VarArg, _getconstants(Proto)}) 
-end
-if Protos and #Protos > 0 then
-GetFuncs(Proto, Globals)
-end
-end
-end
-return Funcs
-end
+local gameId = 9503261072
+
+--loadstring(game:HttpGet('https://raw.githubusercontent.com/recondiite/SecretProject/main/Farm'))()
+--Remotes: game.ReplicatedStorage.Remotes.PlaceTower, game.ReplicatedStorage.Remotes.TowerUpgradeRequest, game.ReplicatedStorage.Remotes.SkipWaveVoteCast
+local actionOrder = {
+
+
+	--tower 1
+	[1] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-362.7292175292969, 123.75299835205078, -104.65520477294922),
+			0
+		}
+	},
+
+	[2] = {
+		Action = "Upgrade",
+		Tower = 1,
+		Path = 1,
+		Amount = 2,
+	},
+
+	[3] = {
+		Action = "Upgrade",
+		Tower = 1,
+		Path = 2,
+		Amount = 1,
+	},
+
+	[4] = {
+		Action = "Upgrade",
+		Tower = 1,
+		Path = 1,
+		Amount = 1,
+	},
+
+
+	--tower 2
+	[5] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-362.7292175292969, 123.75299835205078, -101.65520477294922),
+			0
+		}
+	},
+
+	[6] = {
+		Action = "Upgrade",
+		Tower = 2,
+		Path = 2,
+		Amount = 5,
+	},
+
+	[7] = {
+		Action = "Upgrade",
+		Tower = 1,
+		Path = 1,
+		Amount = 2,
+	},
+
+	[8] = {
+		Action = "Upgrade",
+		Tower = 1,
+		Path = 2,
+		Amount = 1,
+	},
+
+	[9] = {
+		Action = "Upgrade",
+		Tower = 2,
+		Path = 1,
+		Amount = 2,
+	},
+
+
+
+	--tower 3
+	[10] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-362.7292175292969, 123.75299835205078, -107.65520477294922),
+			0
+		}
+	},
+
+	[11] = {
+		Action = "Upgrade",
+		Tower = 3,
+		Path = 1,
+		Amount = 3,
+	},
+
+	[12] = {
+		Action = "Upgrade",
+		Tower = 3,
+		Path = 2,
+		Amount = 2,
+	},
+
+	[13] = {
+		Action = "Upgrade",
+		Tower = 3,
+		Path = 1,
+		Amount = 2,
+	},
+
+
+
+	--tower 4
+	[14] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-360.1012268066406, 123.75299835205078, -100.19678497314453),
+			0
+		}
+	},
+
+	[15] = {
+		Action = "Upgrade",
+		Tower = 4,
+		Path = 2,
+		Amount = 5,
+	},
+
+	[16] = {
+		Action = "Upgrade",
+		Tower = 4,
+		Path = 1,
+		Amount = 2,
+	},
+
+
+
+	--tower 5
+	[17] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-360.1012268066406, 123.75299835205078, -103.19678497314453),
+			0
+		}
+	},
+
+	[18] = {
+		Action = "Upgrade",
+		Tower = 5,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[19] = {
+		Action = "Upgrade",
+		Tower = 5,
+		Path = 2,
+		Amount = 2,
+	},
+
+
+	--tower 6
+	[20] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-360.1012268066406, 123.75299835205078, -106.19678497314453),
+			0
+		}
+	},
+
+	[21] = {
+		Action = "Upgrade",
+		Tower = 6,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[22] = {
+		Action = "Upgrade",
+		Tower = 6,
+		Path = 2,
+		Amount = 2,
+	},
+
+	--tower 7
+	[23] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-360.1012268066406, 123.75299835205078, -109.19678497314453),
+			0
+		}
+	},
+
+	[24] = {
+		Action = "Upgrade",
+		Tower = 7,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[25] = {
+		Action = "Upgrade",
+		Tower = 7,
+		Path = 2,
+		Amount = 2,
+	},
+
+
+
+	--tower 8
+	[26] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-357.1012268066406, 123.75299835205078, -100.19678497314453),
+			0
+		}
+	},
+
+	[27] = {
+		Action = "Upgrade",
+		Tower = 8,
+		Path = 2,
+		Amount = 5,
+	},
+
+	[28] = {
+		Action = "Upgrade",
+		Tower = 8,
+		Path = 1,
+		Amount = 2,
+	},
+
+
+	--tower 9
+	[29] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-357.1012268066406, 123.75299835205078, -103.19678497314453),
+			0
+		}
+	},
+
+	[30] = {
+		Action = "Upgrade",
+		Tower = 9,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[31] = {
+		Action = "Upgrade",
+		Tower = 9,
+		Path = 2,
+		Amount = 2,
+	},
+
+
+	--tower 10
+	[32] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-357.1012268066406, 123.75299835205078, -106.19678497314453),
+			0
+		}
+	},
+
+	[33] = {
+		Action = "Upgrade",
+		Tower = 10,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[34] = {
+		Action = "Upgrade",
+		Tower = 10,
+		Path = 2,
+		Amount = 2,
+	},
+
+
+	--tower 11
+	[35] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-357.1012268066406, 123.75299835205078, -109.19678497314453),
+			0
+		}
+	},
+
+	[36] = {
+		Action = "Upgrade",
+		Tower = 11,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[37] = {
+		Action = "Upgrade",
+		Tower = 11,
+		Path = 2,
+		Amount = 2,
+	},
+
+
+	--tower 12
+	[38] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-351.9363098144531, 123.75299835205078, -115.86131286621094),
+			0
+		}
+	},
+
+	[39] = {
+		Action = "Upgrade",
+		Tower = 12,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[40] = {
+		Action = "Upgrade",
+		Tower = 12,
+		Path = 2,
+		Amount = 2,
+	},
+
+
+
+	--tower 13
+	[41] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-354.9363098144531, 123.75299835205078, -115.861312866210942),
+			0
+		}
+	},
+
+	[42] = {
+		Action = "Upgrade",
+		Tower = 13,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[43] = {
+		Action = "Upgrade",
+		Tower = 13,
+		Path = 2,
+		Amount = 2,
+	},
+
+
+	--tower 14
+	[44] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-357.9363098144531, 123.75299835205078, -115.86131286621094),
+			0
+		}
+	},
+
+	[45] = {
+		Action = "Upgrade",
+		Tower = 14,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[46] = {
+		Action = "Upgrade",
+		Tower = 14,
+		Path = 2,
+		Amount = 2,
+	},
+
+
+	--tower 15
+	[47] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-360.9363098144531, 123.75299835205078, -115.86131286621094),
+			0
+		}
+	},
+
+	[48] = {
+		Action = "Upgrade",
+		Tower = 15,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[49] = {
+		Action = "Upgrade",
+		Tower = 15,
+		Path = 2,
+		Amount = 2,
+	},
+
+
+	--tower 16
+	[50] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-363.9363098144531, 123.75299835205078, -115.86131286621094),
+			0
+		}
+	},
+
+	[51] = {
+		Action = "Upgrade",
+		Tower = 16,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[52] = {
+		Action = "Upgrade",
+		Tower = 16,
+		Path = 2,
+		Amount = 2,
+	},
+
+
+
+
+	--tower 17
+	[53] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-376.5137634277344, 123.75299835205078, -112.48831176757812),
+			0
+		}
+	},
+
+	[54] = {
+		Action = "Upgrade",
+		Tower = 17,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[55] = {
+		Action = "Upgrade",
+		Tower = 17,
+		Path = 2,
+		Amount = 2,
+	},
+
+	--tower 18
+	[56] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-376.5137634277344, 123.75299835205078, -115.48831176757812),
+			0
+		}
+	},
+
+	[57] = {
+		Action = "Upgrade",
+		Tower = 18,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[58] = {
+		Action = "Upgrade",
+		Tower = 18,
+		Path = 2,
+		Amount = 2,
+	},
+
+	--tower 19
+	[59] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-376.5137634277344, 123.75299835205078, -118.48831176757812),
+			0
+		}
+	},
+
+	[60] = {
+		Action = "Upgrade",
+		Tower = 19,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[61] = {
+		Action = "Upgrade",
+		Tower = 19,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	--tower 20
+	[62] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-384.72625732421875, 123.75299835205078, -136.5154266357422),
+			0
+		}
+	},
+
+	[63] = {
+		Action = "Upgrade",
+		Tower = 20,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[64] = {
+		Action = "Upgrade",
+		Tower = 20,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	--tower 21
+	[65] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-350.72894287109375, 123.75299835205078, -199.92970275878906),
+			0
+		}
+	},
+
+	[66] = {
+		Action = "Upgrade",
+		Tower = 21,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[67] = {
+		Action = "Upgrade",
+		Tower = 21,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	--tower 22
+	[68] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-352.4351501464844, 123.75299835205078, -197.13623046875),
+			0
+		}
+	},
+
+	[69] = {
+		Action = "Upgrade",
+		Tower = 22,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[70] = {
+		Action = "Upgrade",
+		Tower = 22,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	--tower 23
+	[71] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-373.84649658203125, 123.75299835205078, -202.00318908691406),
+			0
+		}
+	},
+
+	[72] = {
+		Action = "Upgrade",
+		Tower = 23,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[73] = {
+		Action = "Upgrade",
+		Tower = 23,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	--tower 24
+	[74] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-373.84649658203125, 123.75299835205078, -159.00318908691406),
+			0
+		}
+	},
+
+	[75] = {
+		Action = "Upgrade",
+		Tower = 24,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[76] = {
+		Action = "Upgrade",
+		Tower = 24,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	--tower 25
+	[77] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-370.84649658203125, 123.75299835205078, -202.00318908691406),
+			0
+		}
+	},
+
+	[78] = {
+		Action = "Upgrade",
+		Tower = 25,
+		Path = 2,
+		Amount = 5,
+	},
+
+	[79] = {
+		Action = "Upgrade",
+		Tower = 25,
+		Path = 1,
+		Amount = 2,
+	},
+	
+	[80] = {
+		Action = "Sell",
+		Tower = 1
+	},
+	
+	[81] = {
+		Action = "Sell",
+		Tower = 2
+	},
+	
+	[82] = {
+		Action = "Sell",
+		Tower = 3
+	},
+	
+	[83] = {
+		Action = "Sell",
+		Tower = 4
+	},
+	
+	[84] = {
+		Action = "Sell",
+		Tower = 5
+	},
+	
+	[85] = {
+		Action = "Sell",
+		Tower = 6
+	},
+	
+	[86] = {
+		Action = "Sell",
+		Tower = 7
+	},
+	
+	[87] = {
+		Action = "Sell",
+		Tower = 8
+	},
+	
+	[88] = {
+		Action = "Sell",
+		Tower = 9
+	},
+	
+	[89] = {
+		Action = "Sell",
+		Tower = 10
+	},
+	
+	[90] = {
+		Action = "Sell",
+		Tower = 11
+	},
+	
+	[91] = {
+		Action = "Sell",
+		Tower = 12
+	},
+	
+	[92] = {
+		Action = "Sell",
+		Tower = 13
+	},
+	
+	[93] = {
+		Action = "Sell",
+		Tower = 14
+	},
+	
+	[94] = {
+		Action = "Sell",
+		Tower = 15
+	},
+	
+	[95] = {
+		Action = "Sell",
+		Tower = 16
+	},
+	
+	[96] = {
+		Action = "Sell",
+		Tower = 17
+	},
+	
+	[97] = {
+		Action = "Sell",
+		Tower = 18
+	},
+	
+	[98] = {
+		Action = "Sell",
+		Tower = 19
+	},
+	
+	--tower 26
+	[99] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-370.84649658203125, 123.75299835205078, -159.00318908691406),
+			0
+		}
+	},
+
+	[100] = {
+		Action = "Upgrade",
+		Tower = 1,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[101] = {
+		Action = "Upgrade",
+		Tower = 1,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	--tower 27
+	[102] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-376.84649658203125, 123.75299835205078, -159.00318908691406),
+			0
+		}
+	},
+
+	[103] = {
+		Action = "Upgrade",
+		Tower = 1,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[104] = {
+		Action = "Upgrade",
+		Tower = 1,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	--tower 28
+	[105] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-376.84649658203125, 123.75299835205078, -202.00318908691406),
+			0
+		}
+	},
+	
+	[106] = {
+		Action = "Upgrade",
+		Tower = 2,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[107] = {
+		Action = "Upgrade",
+		Tower = 2,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	
+	--[[[100] = {
+		Action = "Sell",
+		Tower = 1
+	}]]
+
+}
+
+local upgradeValues = {
+	[1] = {
+		[1] = 350,
+		[2] = 450,
+		[3] = 750,
+		[4] = 3050,
+		[5] = 11000
+	},
+	[2] = {
+		[1] = 300,
+		[2] = 500,
+		[3] = 1450,
+		[4] = 3625,
+		[5] = 10000
+	}
+}
+
+local towerIndex = {
+	--[[
+	["BasePart"] = {
+		Upgrades = {
+			0,
+			0
+		}
+		
+		Index = 1,
+	}
+	]]
+}
+
+repeat task.wait() until game:IsLoaded()
+task.wait(2)
+
+local player = game.Players.LocalPlayer
+local currentIndexedAction = 1
+
+local function findMap()
+	for i,v in pairs(workspace.APCs:GetDescendants()) do
+		if v:IsA("BasePart") == false then continue end
+		if v.Name ~= "screen" then continue end
+
+		if v.displayscreen.map.Text == whitelistedMap then return v.Parent.Parent end
+	end
 end
 
-_getgenv().decompile = (function(Script, ...)
-if typeof(Script) == "Instance" then
-local isModuleScript = IsA(Script, "ModuleScript")
-if isModuleScript or (IsA(Script, "LocalScript") and not Script.Disabled) then
-local Success, Globals = pcall(((isModuleScript and require) or _getsenv), Script)
-local Closure = _getscriptclosure(Script)
-if isModuleScript and Success then
-if type(Globals) ~= "table" then
-Success, Globals = pcall(_getmenv, Script)
+local function tpPlayerToLobby()
+	if player.Character == nil then return end
+	if player.Character:FindFirstChild("HumanoidRootPart") == nil then return end
+
+	if player.Character:FindFirstChild("Humanoid") == nil then return end
+	if player.Character.Humanoid.Sit == true then return end
+
+	local map = findMap()
+	if map == nil then return end
+
+	player.Character:SetPrimaryPartCFrame(map.mapdisplay.screen.CFrame)
 end
+
+local function getMoney()
+	return player.leaderstats.Cash.Value
 end
-if Success and Closure then
-local Source = _decompile(Script, ...)
-if Source then
-do -- local function names
-local Funcs = GetFuncs(Closure, Globals)
-for Match in stringgmatch(Source, "function %w+%.%w+%b()") do
-local Name = stringmatch(Match, "%.(%w+)")
-for Iteration = 1, #Funcs do
-if Funcs[Iteration][1] == Name then
-tableremove(Funcs, Iteration)
-break
+
+local function getWave()
+	return tonumber(string.split(player.PlayerGui.Interface.GameInfoBar.WaveText.Text, " ")[2])
 end
+
+local function getUpgradeCost(path, current)
+	return upgradeValues[path][current]
 end
+
+local function getNewTowerID(number)
+	for i,v in pairs(towerIndex) do
+		if v.Index == number then
+			return getNewTowerID(number + 1)
+		end
+	end
+
+	return number
 end
-for Proto in stringgmatch(Source, "%s+local function %l%d+%b()") do
-local Spaces = stringmatch(Proto, "%s+")
-local GeneratedName = stringmatch(Proto, "%l%d+")
-local ArgPattern = stringmatch(Proto, "%b()")
-local _, Args = stringgsub(ArgPattern, "p%d+", "")
-local IsVarArg = stringfind(ArgPattern, "...", 1, true) ~= nil
-local ProtoClosure = stringmatch(Source, "local function " .. GeneratedName .. "%b().+" .. Spaces .. "end;") or ""
-ProtoClosure = stringgsub(ProtoClosure, "local function %l%d+%b().+end;$", function(Match)
-local Split = stringsplit(Match, Spaces .. "end;\n")
-local NumSplit = #Split
-if NumSplit > 1 then
-for Index = 1, NumSplit do
-local SplitI = Split[Index]
-if stringmatch(SplitI, GeneratedName) then
-return SplitI .. Spaces .. "end;"
+
+local function getTowerData(number)
+	for i,v in pairs(towerIndex) do
+		if v.Index == number then
+			return i,v
+		end
+	end
 end
+
+local function upgradeTower(towerNumber, path)
+	local tower = nil
+
+	local tower,towerData = getTowerData(towerNumber)
+
+	if tower == nil or towerIndex[tower] == nil then return end
+
+	towerIndex[tower].Upgrades[path] = towerIndex[tower].Upgrades[path] + 1
+	game.ReplicatedStorage.Remotes.TowerUpgradeRequest:FireServer(towerNumber, path)
 end
+
+
+
+local function act()
+	local currentAction = actionOrder[currentIndexedAction]
+	if currentIndexedAction > #actionOrder then return end
+
+	if player.PlayerGui:FindFirstChild("Interface").GameOverScreen.Visible == true then
+		game:GetService("ReplicatedStorage").Remotes.RequestTeleportToLobby:FireServer()
+		return
+	end
+	
+	if currentAction.Action == "SellTower" then
+		game:GetService("ReplicatedStorage").Remotes.SellTower:FireServer(currentAction.Tower)
+	end
+
+	if currentAction.Action == "PlaceTower" then
+		if getMoney() < 280 then return end
+		game.ReplicatedStorage.Remotes.PlaceTower:InvokeServer(unpack(currentAction.RemoteData))
+	end
+
+	if currentAction.Action == "Upgrade" then
+		local _,towerData = getTowerData(currentAction.Tower)
+		if towerData == nil then return end
+
+
+		local upgradeCost = getUpgradeCost(currentAction.Path, towerData.Upgrades[currentAction.Path])
+		if upgradeCost >= getMoney() then return end
+
+		upgradeTower(currentAction.Tower, currentAction.Path)
+
+		currentAction.Amount = currentAction.Amount - 1
+		if currentAction.Amount > 0 then return end
+	end
+
+	if currentAction.Action == "Skip" then
+		game.ReplicatedStorage.Remotes.SkipWaveVoteCast:FireServer(true)
+	end
+
+	currentIndexedAction = currentIndexedAction + 1
 end
-return Match
+
+local function useAbilities()
+	for i,v in pairs(towerIndex) do
+		game.ReplicatedStorage.Remotes.TowerUseAbilityRequest:InvokeServer(v.Index, 1)
+	end
+end
+
+if game.PlaceId ~= gameId then
+	game:GetService("ReplicatedStorage").Remotes.DifficultyVoteReady:FireServer()
+
+	workspace.Towers.ChildAdded:Connect(function(part)
+		towerIndex[part] = {
+			Upgrades = {
+				1,
+				1
+			},
+
+			Index = getNewTowerID(1),
+		}
+	end)
+
+	workspace.Towers.ChildRemoved:Connect(function(part)
+		towerIndex[part] = nil
+	end)
+
+end
+
+
+game:GetService("RunService").RenderStepped:Connect(function()
+	if game.PlaceId == gameId then
+		tpPlayerToLobby()
+		return
+	end
+
+	act()
+	useAbilities()
 end)
-for Iteration = 1, #Funcs do
-local Func = Funcs[Iteration]
-local Name = Func[1]
-if Args == Func[2] then
-if IsVarArg == Func[3] then
-local Constants = Func[4]
-local HasConstants = true
-for Index = 1, #Constants do
-local Constant = Constants[Index]
-if type(Constant) == "string" then
-if not stringfind(ProtoClosure, Constant, 1, true) then
-HasConstants = false
-break
-end
-end
-end
-if HasConstants then
-tableremove(Funcs, Iteration)
-Source = stringgsub(Source, GeneratedName, Name)
-break
-else
-continue
-end
-end
-end
-end
-end
-tableclear(Funcs)
-end
-return Source
-end
-end
-end
-end
-return _decompile(Script, ...)
-end)
+
+--[[while task.wait(1) do
+	if game.PlaceId == gameId then
+		tpPlayerToLobby()
+		continue
+	end
+
+	act()
+	useAbilities()
+end]]
