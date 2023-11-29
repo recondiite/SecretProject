@@ -218,9 +218,9 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
-	
-	
+
+
+
 	--tower 8
 	[26] = {
 		Action = "PlaceTower",
@@ -245,8 +245,8 @@ local actionOrder = {
 		Path = 1,
 		Amount = 2,
 	},
-	
-	
+
+
 	--tower 9
 	[29] = {
 		Action = "PlaceTower",
@@ -271,8 +271,8 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
-	
+
+
 	--tower 10
 	[32] = {
 		Action = "PlaceTower",
@@ -297,8 +297,8 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
-	
+
+
 	--tower 11
 	[35] = {
 		Action = "PlaceTower",
@@ -323,8 +323,8 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
-	
+
+
 	--tower 12
 	[38] = {
 		Action = "PlaceTower",
@@ -349,9 +349,9 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
-	
-	
+
+
+
 	--tower 13
 	[41] = {
 		Action = "PlaceTower",
@@ -376,8 +376,8 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
-	
+
+
 	--tower 14
 	[44] = {
 		Action = "PlaceTower",
@@ -402,8 +402,8 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
-	
+
+
 	--tower 15
 	[47] = {
 		Action = "PlaceTower",
@@ -428,8 +428,8 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
-	
+
+
 	--tower 16
 	[50] = {
 		Action = "PlaceTower",
@@ -454,10 +454,10 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
-	
-	
-	
+
+
+
+
 	--tower 17
 	[53] = {
 		Action = "PlaceTower",
@@ -482,7 +482,7 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
+
 	--tower 18
 	[56] = {
 		Action = "PlaceTower",
@@ -507,7 +507,7 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
+
 	--tower 19
 	[59] = {
 		Action = "PlaceTower",
@@ -533,6 +533,339 @@ local actionOrder = {
 		Amount = 2,
 	},
 	
+	
+	--tower 20
+	[62] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-384.72625732421875, 123.75299835205078, -136.5154266357422),
+			0
+		}
+	},
+
+	[63] = {
+		Action = "Upgrade",
+		Tower = 20,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[64] = {
+		Action = "Upgrade",
+		Tower = 20,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	--tower 21
+	[65] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-350.72894287109375, 123.75299835205078, -199.92970275878906),
+			0
+		}
+	},
+
+	[66] = {
+		Action = "Upgrade",
+		Tower = 21,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[67] = {
+		Action = "Upgrade",
+		Tower = 21,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	--tower 22
+	[68] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-352.4351501464844, 123.75299835205078, -197.13623046875),
+			0
+		}
+	},
+
+	[69] = {
+		Action = "Upgrade",
+		Tower = 22,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[70] = {
+		Action = "Upgrade",
+		Tower = 22,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	--tower 23
+	[71] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-373.84649658203125, 123.75299835205078, -202.00318908691406),
+			0
+		}
+	},
+
+	[72] = {
+		Action = "Upgrade",
+		Tower = 23,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[73] = {
+		Action = "Upgrade",
+		Tower = 23,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	--tower 24
+	[74] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-373.84649658203125, 123.75299835205078, -159.00318908691406),
+			0
+		}
+	},
+
+	[75] = {
+		Action = "Upgrade",
+		Tower = 24,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[76] = {
+		Action = "Upgrade",
+		Tower = 24,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	--tower 25
+	[77] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-370.84649658203125, 123.75299835205078, -202.00318908691406),
+			0
+		}
+	},
+
+	[78] = {
+		Action = "Upgrade",
+		Tower = 25,
+		Path = 2,
+		Amount = 5,
+	},
+
+	[79] = {
+		Action = "Upgrade",
+		Tower = 25,
+		Path = 1,
+		Amount = 2,
+	},
+	
+	[80] = {
+		Action = "Sell",
+		Tower = 1
+	},
+	
+	[81] = {
+		Action = "Sell",
+		Tower = 2
+	},
+	
+	[82] = {
+		Action = "Sell",
+		Tower = 3
+	},
+	
+	[83] = {
+		Action = "Sell",
+		Tower = 4
+	},
+	
+	[84] = {
+		Action = "Sell",
+		Tower = 5
+	},
+	
+	[85] = {
+		Action = "Sell",
+		Tower = 6
+	},
+	
+	[86] = {
+		Action = "Sell",
+		Tower = 7
+	},
+	
+	[87] = {
+		Action = "Sell",
+		Tower = 8
+	},
+	
+	[88] = {
+		Action = "Sell",
+		Tower = 9
+	},
+	
+	[89] = {
+		Action = "Sell",
+		Tower = 10
+	},
+	
+	[90] = {
+		Action = "Sell",
+		Tower = 11
+	},
+	
+	[91] = {
+		Action = "Sell",
+		Tower = 12
+	},
+	
+	[92] = {
+		Action = "Sell",
+		Tower = 13
+	},
+	
+	[93] = {
+		Action = "Sell",
+		Tower = 14
+	},
+	
+	[94] = {
+		Action = "Sell",
+		Tower = 15
+	},
+	
+	[95] = {
+		Action = "Sell",
+		Tower = 16
+	},
+	
+	[96] = {
+		Action = "Sell",
+		Tower = 17
+	},
+	
+	[97] = {
+		Action = "Sell",
+		Tower = 18
+	},
+	
+	[98] = {
+		Action = "Sell",
+		Tower = 19
+	},
+	
+	--tower 26
+	[99] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-370.84649658203125, 123.75299835205078, -159.00318908691406),
+			0
+		}
+	},
+
+	[100] = {
+		Action = "Upgrade",
+		Tower = 1,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[101] = {
+		Action = "Upgrade",
+		Tower = 1,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	--tower 27
+	[102] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-376.84649658203125, 123.75299835205078, -159.00318908691406),
+			0
+		}
+	},
+
+	[103] = {
+		Action = "Upgrade",
+		Tower = 1,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[104] = {
+		Action = "Upgrade",
+		Tower = 1,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	--tower 28
+	[105] = {
+		Action = "PlaceTower",
+		RemoteData = {
+			2460.55054241,
+			"Ranger",
+			Vector3.new(-376.84649658203125, 123.75299835205078, -202.00318908691406),
+			0
+		}
+	},
+	
+	[106] = {
+		Action = "Upgrade",
+		Tower = 2,
+		Path = 1,
+		Amount = 5,
+	},
+
+	[107] = {
+		Action = "Upgrade",
+		Tower = 2,
+		Path = 2,
+		Amount = 2,
+	},
+	
+	
+	
+	--[[[100] = {
+		Action = "Sell",
+		Tower = 1
+	}]]
+
 }
 
 local upgradeValues = {
@@ -581,16 +914,13 @@ local function findMap()
 end
 
 local function tpPlayerToLobby()
-	print(0)
 	if player.Character == nil then return end
 	if player.Character:FindFirstChild("HumanoidRootPart") == nil then return end
-	
-	print(1)
+
 	if player.Character:FindFirstChild("Humanoid") == nil then return end
 	if player.Character.Humanoid.Sit == true then return end
-	
+
 	local map = findMap()
-	print(findMap())
 	if map == nil then return end
 
 	player.Character:SetPrimaryPartCFrame(map.mapdisplay.screen.CFrame)
@@ -614,7 +944,7 @@ local function getNewTowerID(number)
 			return getNewTowerID(number + 1)
 		end
 	end
-	
+
 	return number
 end
 
@@ -628,7 +958,7 @@ end
 
 local function upgradeTower(towerNumber, path)
 	local tower = nil
-	
+
 	local tower,towerData = getTowerData(towerNumber)
 
 	if tower == nil or towerIndex[tower] == nil then return end
@@ -646,6 +976,10 @@ local function act()
 	if player.PlayerGui:FindFirstChild("Interface").GameOverScreen.Visible == true then
 		game:GetService("ReplicatedStorage").Remotes.RequestTeleportToLobby:FireServer()
 		return
+	end
+	
+	if currentAction.Action == "SellTower" then
+		game:GetService("ReplicatedStorage").Remotes.SellTower:FireServer(currentAction.Tower)
 	end
 
 	if currentAction.Action == "PlaceTower" then
