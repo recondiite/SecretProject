@@ -1035,7 +1035,18 @@ if game.PlaceId ~= gameId then
 
 end
 
-while task.wait(1) do
+
+game:GetService("RunService").RenderStepped:Connect(function()
+	if game.PlaceId == gameId then
+		tpPlayerToLobby()
+		return
+	end
+
+	act()
+	useAbilities()
+end)
+
+--[[while task.wait(1) do
 	if game.PlaceId == gameId then
 		tpPlayerToLobby()
 		continue
@@ -1043,4 +1054,4 @@ while task.wait(1) do
 
 	act()
 	useAbilities()
-end
+end]]
