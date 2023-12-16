@@ -532,8 +532,8 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
-	
+
+
 	--tower 20
 	[62] = {
 		Action = "PlaceTower",
@@ -558,8 +558,8 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
-	
+
+
 	--tower 21
 	[65] = {
 		Action = "PlaceTower",
@@ -584,8 +584,8 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
-	
+
+
 	--tower 22
 	[68] = {
 		Action = "PlaceTower",
@@ -610,8 +610,8 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
-	
+
+
 	--tower 23
 	[71] = {
 		Action = "PlaceTower",
@@ -636,7 +636,7 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
+
 	--tower 24
 	[74] = {
 		Action = "PlaceTower",
@@ -661,8 +661,8 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
-	
+
+
 	--tower 25
 	[77] = {
 		Action = "PlaceTower",
@@ -687,102 +687,102 @@ local actionOrder = {
 		Path = 1,
 		Amount = 2,
 	},
-	
+
 	[80] = {
 		Action = "Sell",
 		Tower = 1
 	},
-	
+
 	[81] = {
 		Action = "Sell",
 		Tower = 2
 	},
-	
+
 	[82] = {
 		Action = "Sell",
 		Tower = 3
 	},
-	
+
 	[83] = {
 		Action = "Sell",
 		Tower = 4
 	},
-	
+
 	[84] = {
 		Action = "Sell",
 		Tower = 5
 	},
-	
+
 	[85] = {
 		Action = "Sell",
 		Tower = 6
 	},
-	
+
 	[86] = {
 		Action = "Sell",
 		Tower = 7
 	},
-	
+
 	[87] = {
 		Action = "Sell",
 		Tower = 8
 	},
-	
+
 	[88] = {
 		Action = "Sell",
 		Tower = 9
 	},
-	
+
 	[89] = {
 		Action = "Sell",
 		Tower = 10
 	},
-	
+
 	[90] = {
 		Action = "Sell",
 		Tower = 11
 	},
-	
+
 	[91] = {
 		Action = "Sell",
 		Tower = 12
 	},
-	
+
 	[92] = {
 		Action = "Sell",
 		Tower = 13
 	},
-	
+
 	[93] = {
 		Action = "Sell",
 		Tower = 14
 	},
-	
+
 	[94] = {
 		Action = "Sell",
 		Tower = 15
 	},
-	
+
 	[95] = {
 		Action = "Sell",
 		Tower = 16
 	},
-	
+
 	[96] = {
 		Action = "Sell",
 		Tower = 17
 	},
-	
+
 	[97] = {
 		Action = "Sell",
 		Tower = 18
 	},
-	
+
 	[98] = {
 		Action = "Sell",
 		Tower = 19
 	},
-	
+
 	--tower 26
 	[99] = {
 		Action = "PlaceTower",
@@ -807,7 +807,7 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
+
 	--tower 27
 	[102] = {
 		Action = "PlaceTower",
@@ -832,8 +832,8 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
-	
+
+
 	--tower 28
 	[105] = {
 		Action = "PlaceTower",
@@ -844,7 +844,7 @@ local actionOrder = {
 			0
 		}
 	},
-	
+
 	[106] = {
 		Action = "Upgrade",
 		Tower = 2,
@@ -858,9 +858,9 @@ local actionOrder = {
 		Path = 2,
 		Amount = 2,
 	},
-	
-	
-	
+
+
+
 	--[[[100] = {
 		Action = "Sell",
 		Tower = 1
@@ -903,6 +903,9 @@ task.wait(2)
 
 local player = game.Players.LocalPlayer
 local currentIndexedAction = 1
+
+local canContinue = true
+local prevCash = 0
 
 local function findMap()
 	for i,v in pairs(workspace.APCs:GetDescendants()) do
@@ -970,6 +973,8 @@ end
 
 
 local function act()
+	if canContinue == false then return end
+	
 	local currentAction = actionOrder[currentIndexedAction]
 	if currentIndexedAction > #actionOrder then return end
 
@@ -977,13 +982,20 @@ local function act()
 		game:GetService("ReplicatedStorage").Remotes.RequestTeleportToLobby:FireServer()
 		return
 	end
-	
+
 	if currentAction.Action == "SellTower" then
+		prevCash = player.leaderstats.Cash.Value
+		canContinue = false
+		
 		game:GetService("ReplicatedStorage").Remotes.SellTower:FireServer(currentAction.Tower)
 	end
 
 	if currentAction.Action == "PlaceTower" then
 		if getMoney() < 280 then return end
+		
+		prevCash = player.leaderstats.Cash.Value
+		canContinue = false
+		
 		game.ReplicatedStorage.Remotes.PlaceTower:InvokeServer(unpack(currentAction.RemoteData))
 	end
 
@@ -994,6 +1006,9 @@ local function act()
 
 		local upgradeCost = getUpgradeCost(currentAction.Path, towerData.Upgrades[currentAction.Path])
 		if upgradeCost >= getMoney() then return end
+		
+		prevCash = player.leaderstats.Cash.Value
+		canContinue = false
 
 		upgradeTower(currentAction.Tower, currentAction.Path)
 
@@ -1043,6 +1058,12 @@ game:GetService("RunService").RenderStepped:Connect(function()
 
 	act()
 	useAbilities()
+end)
+
+player.leaderstats.Cash.Changed:Connect(function()
+	if prevCash > player.leaderstats.Cash.Value then
+		canContinue = true
+	end
 end)
 
 --[[while task.wait(1) do
