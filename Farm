@@ -973,6 +973,7 @@ end
 
 
 local function act()
+	print(prevCash, canContinue)
 	if canContinue == false then return end
 	
 	local currentAction = actionOrder[currentIndexedAction]
@@ -1061,9 +1062,9 @@ game:GetService("RunService").RenderStepped:Connect(function()
 end)
 
 player.leaderstats.Cash.Changed:Connect(function()
-	if prevCash > player.leaderstats.Cash.Value then
+	--if prevCash > player.leaderstats.Cash.Value then
 		canContinue = true
-	end
+	--end
 end)
 
 --[[while task.wait(1) do
