@@ -973,10 +973,10 @@ end
 
 
 local function act()
-	print(prevCash, canContinue)
 	if canContinue == false then return end
 	
 	local currentAction = actionOrder[currentIndexedAction]
+	print(currentAction, #actionOrder)
 	if currentIndexedAction > #actionOrder then return end
 
 	if player.PlayerGui:FindFirstChild("Interface").GameOverScreen.Visible == true then
@@ -1003,10 +1003,13 @@ local function act()
 	if currentAction.Action == "Upgrade" then
 		local _,towerData = getTowerData(currentAction.Tower)
 		if towerData == nil then return end
-
+		
+		print('tower exists')
 
 		local upgradeCost = getUpgradeCost(currentAction.Path, towerData.Upgrades[currentAction.Path])
 		if upgradeCost >= getMoney() then return end
+		
+		print('has money')
 		
 		prevCash = player.leaderstats.Cash.Value
 		canContinue = false
